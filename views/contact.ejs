@@ -1,0 +1,422 @@
+<%- include("partials/header.ejs")  %>
+
+
+<header class="header-area header-style-5">
+    <div class="header-top header-top-ptb-1 d-none d-lg-block">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-3 col-lg-4">
+                    <div class="header-info">
+                        <ul>
+                            <!-- <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li> -->
+                            <!-- <li><i class="fi-rs-marker"></i><a href="page-contact.html">Our location</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-4">
+                    <!-- <div class="text-center">
+                        <div id="news-flash" class="d-inline-block">
+                            <ul>
+                                <li>Get great devices up to 50% off <a href="shop-grid-right.html">View details</a></li>
+                                <li>Supper Value Deals - Save more with coupons</li>
+                                <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right.html">Shop
+                                        now</a></li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="col-xl-3 col-lg-4">
+                    <div class="header-info header-info-right">
+                        <ul>
+                            <% if(userEmail === null) { %>
+                                <li><i class="fi-rs-user"></i><a href="/signup">Sign Up</a></li>
+                                <li><i class="fi-rs-user"></i><a href="/login">Log In </a></li>   
+                            <% } else {  %>
+    
+                                <li><i class="fa-solid fa-user"></i><a href="/profile">Profile</a></li>
+
+                                <li><i class="fi-rs-user"></i><a href="/logout">Logout</a></li>    
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom sticky-bar sticky-white-bg">
+        <div class="container">
+            <div class="header-wrap header-space-between position-relative">
+                <div class="logo logo-width-1">
+                    <a href="/"><img src="/assets/imgs/theme/inloop-logo.png" alt="logo"></a>
+                </div>
+                <div
+                    class="main-menu main-menu-grow main-menu-padding-1 main-menu-lh-1 main-menu-mrg-1 hm3-menu-padding d-none d-lg-block hover-boder">
+                    <nav>
+                        <ul>
+                            <li><a class="active" href="/">Home </a>
+                            </li>
+                            <li><a href="/shop">Shop </a>
+                            </li>
+                            <li>
+                                <a href="/contact">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="header-action-right">
+                    <!-- <div class="search-style-2">
+                        <form action="#">
+                            <select class="select-active">
+                                <option>Search in</option>
+                                <option>Women's Clothing</option>
+                                <option>Men's Clothing</option>
+                                <option>Cellphones</option>
+                                <option>Computer & Office</option>
+                                <option>Consumer Electronics</option>
+                                <option>Jewelry & Accessories</option>
+                                <option>Home & Garden</option>
+                                <option>Luggage & Bags</option>
+                                <option>Shoes</option>
+                                <option>Mother & Kids</option>
+                            </select>
+                            <input type="text" placeholder="Search for items…">
+                        </form>
+                    </div> -->
+                    <div class="header-action-2">
+                        <div class="header-action-icon-2">
+                            <a href="/wishlist">
+                                <img class="svgInject" alt="Evara"
+                                    src="/userassets/imgs/theme/icons/icon-heart.svg">
+                                <span class="pro-count blue"><%= wishlistCount %></span>
+                            </a>
+                        </div>
+                        <div class="header-action-icon-2">
+                            <a class="mini-cart-icon" href="/cart">
+                                <img alt="Evara" src="/userassets/imgs/theme/icons/icon-cart.svg">
+                                <span class="pro-count blue"><%=  cartItemCount  %></span>
+                            </a>
+                            <!-- <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                <ul>
+                                    <li>
+                                        <div class="shopping-cart-img">
+                                            <a href="shop-product-right.html"><img alt="Evara"
+                                                    src="userassets/imgs/shop/thumbnail-3.jpg"></a>
+                                        </div>
+                                        <div class="shopping-cart-title">
+                                            <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
+                                            <h3><span>1 × </span>$800.00</h3>
+                                        </div>
+                                        <div class="shopping-cart-delete">
+                                            <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="shopping-cart-img">
+                                            <a href="shop-product-right.html"><img alt="Evara"
+                                                    src="userassets/imgs/shop/thumbnail-1.jpg"></a>
+                                        </div>
+                                        <div class="shopping-cart-title">
+                                            <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
+                                            <h3><span>1 × </span>$3200.00</h3>
+                                        </div>
+                                        <div class="shopping-cart-delete">
+                                            <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="shopping-cart-footer">
+                                    <div class="shopping-cart-total">
+                                        <h4>Total <span>$4000.00</span></h4>
+                                    </div>
+                                    <div class="shopping-cart-button">
+                                        <a href="shop-cart.html">View cart</a>
+                                        <a href="shop-checkout.html">Checkout</a>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="header-action-icon d-block d-lg-none">
+                            <div class="burger-icon">
+                                <span class="burger-icon-top"></span>
+                                <span class="burger-icon-mid"></span>
+                                <span class="burger-icon-bottom"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<%- include('partials/mobile.ejs') %>
+
+
+<main class="main">
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/" rel="nofollow">Home</a>
+                <span></span> Pages
+                <span></span> Contact us
+            </div>
+        </div>
+    </div>
+    <section class="hero-2 bg-green">
+        <div class="hero-content">
+            <div class="container">
+                <div class="text-center">
+                    <h4 class="text-brand mb-20">Get in touch</h4>
+                    <h1 class="mb-20 wow fadeIn animated font-xxl fw-900">
+                        Let's Talk About <br>Your <span class="text-style-1">Idea <br> With Us </span>
+                    </h1>
+                    <!-- <p class="w-50 m-auto mb-50 wow fadeIn animated">Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Harum quam eius placeat, a quidem mollitia at accusantium reprehenderit pariatur provident
+                        nam ratione incidunt magnam sequi.</p>
+                    <p class="wow fadeIn animated">
+                        <a class="btn btn-brand btn-lg font-weight-bold text-white border-radius-5 btn-shadow-brand hover-up"
+                            href="page-about.html">About Us</a>
+                        <a
+                            class="btn btn-outline btn-lg btn-brand-outline font-weight-bold text-brand bg-white text-hover-white ml-15 border-radius-5 btn-shadow-brand hover-up">Support
+                            Center</a>
+                    </p> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <section class="section-border pt-50 pb-50">
+        <div class="container">
+            <div id='map-panes' class="leaflet-map mb-50"></div>
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h4 class="mb-15 text-brand">Office</h4>
+                    205 North Michigan Avenue, Suite 810<br>
+                    Chicago, 60601, USA<br>
+                    <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
+                    <abbr title="Email">Email: </abbr>contact@Evara.com<br>
+                    <a
+                        class="btn btn-outline btn-sm btn-brand-outline font-weight-bold text-brand bg-white text-hover-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i
+                            class="fi-rs-marker mr-10"></i>View map</a>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h4 class="mb-15 text-brand">Studio</h4>
+                    205 North Michigan Avenue, Suite 810<br>
+                    Chicago, 60601, USA<br>
+                    <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
+                    <abbr title="Email">Email: </abbr>contact@Evara.com<br>
+                    <a
+                        class="btn btn-outline btn-sm btn-brand-outline font-weight-bold text-brand bg-white text-hover-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i
+                            class="fi-rs-marker mr-10"></i>View map</a>
+                </div>
+                <div class="col-md-4">
+                    <h4 class="mb-15 text-brand">Shop</h4>
+                    205 North Michigan Avenue, Suite 810<br>
+                    Chicago, 60601, USA<br>
+                    <abbr title="Phone">Phone:</abbr> (123) 456-7890<br>
+                    <abbr title="Email">Email: </abbr>contact@Evara.com<br>
+                    <a
+                        class="btn btn-outline btn-sm btn-brand-outline font-weight-bold text-brand bg-white text-hover-white mt-20 border-radius-5 btn-shadow-brand hover-up">
+                        <i class="fi-rs-marker mr-10"></i> View map</a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <section class="pt-50 pb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-10 m-auto">
+                    <div class="contact-from-area padding-20-row-col wow FadeInUp">
+                        <h3 class="mb-10 text-center">Drop Us a Line</h3>
+                        <form class="contact-form-style text-center" id="contact-form" action="/send-message" method="post">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="input-style mb-20">
+                                        <input name="name" placeholder="First Name" type="text">
+                                        <div class="error-message" id="name-error"></div> <!-- Error message container -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="input-style mb-20">
+                                        <input name="email" placeholder="Your Email" type="email">
+                                        <div class="error-message" id="email-error"></div> <!-- Error message container -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="input-style mb-20">
+                                        <input name="telephone" placeholder="Your Phone" type="tel">
+                                        <div class="error-message" id="telephone-error"></div> <!-- Error message container -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="input-style mb-20">
+                                        <input name="subject" placeholder="Subject" type="text">
+                                        <div class="error-message" id="subject-error"></div> <!-- Error message container -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="textarea-style mb-30">
+                                        <textarea name="message" placeholder="Message"></textarea>
+                                        <div class="error-message" id="message-error"></div> <!-- Error message container -->
+                                    </div>
+                                    <button class="submit submit-auto-width" type="submit">
+                                        <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true" style="padding-right: 20px;"></span>Send message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <p class="form-messege"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const contactForm = document.getElementById('contact-form');
+                const spinner = document.getElementById('spinner');
+        
+                contactForm.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+        
+                    clearErrors();
+        
+                    const name = document.querySelector('input[name="name"]').value.trim();
+                    const email = document.querySelector('input[name="email"]').value.trim();
+                    const telephone = document.querySelector('input[name="telephone"]').value.trim();
+                    const subject = document.querySelector('input[name="subject"]').value.trim();
+                    const message = document.querySelector('textarea[name="message"]').value.trim();
+        
+                    if (!name) {
+                        displayError('Please enter your first name.', 'name');
+                        return;
+                    }
+        
+                    if (!email || !isValidEmail(email)) {
+                        displayError('Please enter a valid email address.', 'email');
+                        return;
+                    }
+        
+                    if (telephone && !isValidPhone(telephone)) {
+                        displayError('Please enter a valid phone number.', 'telephone');
+                        return;
+                    }
+        
+                    if (!subject) {
+                        displayError('Please enter the subject.', 'subject');
+                        return;
+                    }
+        
+                    if (!message) {
+                        displayError('Please enter your message.', 'message');
+                        return;
+                    }
+        
+                    // Simulate form submission delay (remove this line in a real scenario)
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+        
+                    spinner.classList.remove('d-none');
+                    
+                    // Simulate a successful form submission (replace this with your actual form submission logic)
+                    setTimeout(function () {
+                        alert('Form submitted successfully!');
+                        spinner.classList.add('d-none');
+                    }, 2000);
+                });
+        
+                function isValidEmail(email) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return emailRegex.test(email);
+                }
+        
+                function isValidPhone(telephone) {
+                    const phoneRegex = /^[0-9]+$/;
+                    return phoneRegex.test(telephone);
+                }
+        
+                function displayError(message, field) {
+                    const errorMessageContainer = document.getElementById(`${field}-error`);
+                    const inputField = document.querySelector(`input[name="${field}"]`);
+                    const textareaField = document.querySelector(`textarea[name="${field}"]`);
+        
+                    errorMessageContainer.innerHTML = message;
+                    errorMessageContainer.style.color = 'red'; // Set error message color
+        
+                    if (inputField) {
+                        inputField.classList.add('error');
+                    }
+        
+                    if (textareaField) {
+                        textareaField.classList.add('error');
+                    }
+                }
+        
+                function clearErrors() {
+                    const errorFields = document.querySelectorAll('.error');
+                    const errorMessages = document.querySelectorAll('.error-message');
+        
+                    errorFields.forEach(function (field) {
+                        field.classList.remove('error');
+                    });
+        
+                    errorMessages.forEach(function (message) {
+                        message.innerHTML = '';
+                    });
+                }
+            });
+        </script>
+    </section>
+    <script>
+
+
+//after confirmation
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('contact-form');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const spinner = document.getElementById('spinner');
+
+    // Show the spinner
+    spinner.classList.remove('d-none');
+
+    // Validate form fields before submission
+    if (!validateForm()) {
+      // If validation fails, hide the spinner and prevent form submission
+      spinner.classList.add('d-none');
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new URLSearchParams(formData),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+      .then((response) => {
+        spinner.classList.add('d-none');
+        if (response.ok) {
+          // If the form submission is successful, show a SweetAlert
+          Swal.fire({
+            icon: 'success',
+            title: 'Message Sent!',
+            text: 'We will get back to you soon.',
+          });
+
+          // Clear the form
+          form.reset();
+        } else {
+          throw new Error('Failed to send message');
+        }
+      })
+      .catch((error) => {
+        spinner.classList.add('d-none');
+        console.error('Error:', error);
+        // Handle error if needed
+      });
+  });
+    </script>
+
+    <%- include("partials/footer.ejs")  %>

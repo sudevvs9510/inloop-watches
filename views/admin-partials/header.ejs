@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Inloop Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <!-- bootsrap cdn  -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css"  crossorigin="anonymous" />
+
+    <!-- sdgsd  -->
+   
+
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.19.0/font/bootstrap-icons.css" rel="stylesheet"> -->
+    
+    <style>
+        /* Custom CSS for the centered and smaller modal */
+        .btn-edit {
+            display: flex;
+        }
+    
+        .actives {
+            display: inline-block;
+            padding: 2px 5px;
+            background-color: green;
+            color: white;
+            border-radius: 3px;
+        }
+    
+        /* Styles for Inactive */
+        .inactive {
+            display: inline-block;
+            padding: 2px 5px;
+            background-color: red;
+            color: white;
+            border-radius: 3px;
+        }
+    
+        .receipt-modal {
+            text-align: center;
+        }
+    
+        .receipt {
+            text-align: left;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    
+        #generateCodeContainer {
+            display: inline-block;
+            cursor: pointer;
+            /* Make it appear clickable */
+            text-decoration: underline;
+            /* Make the text look like a link */
+            font-weight: normal;
+            /* Remove button's bold text style */
+            background: none;
+            /* Remove background color */
+            border: none;
+            /* Remove border */
+            padding: 0;
+            /* Remove padding */
+            margin: 0;
+            /* Remove margin */
+        }
+    
+        .custom-toast {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            /* Adjust the z-index to your needs */
+            display: none;
+        }
+    
+        .toast-content {
+            background-color: #f44336;
+            /* Customize the background color */
+            color: #fff;
+            /* Customize the text color */
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            max-width: 300px;
+        }
+    
+        .toast-header {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .toast-title {
+            font-weight: bold;
+        }
+    
+        .toast-close {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    
+        .toast-body {
+            padding: 10px;
+        }
+    
+        #notification-bar {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            /* Center the content horizontally */
+            align-items: center;
+            /* Center the content vertically */
+            background-color: #F4E0E1;
+            color: #A42732;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+    
+        #notification-bar.visible {
+            display: block;
+            transform: translateX(-50%) translateY(20px);
+            transition: transform 0.3s ease;
+        }
+    
+        #notification-icon {
+            width: 30px;
+            /* Adjust the size of the icon */
+            height: 30px;
+            /* Adjust the size of the icon */
+            margin-right: 10px;
+        }
+    
+    
+        /* Styles for success message */
+        .success-message {
+            background-color: #A9DFBF;
+            color: #196F3D;
+        }
+    
+        /* Styles for error message */
+        .error-message {
+            background-color: #F4E0E1;
+            color: #A42732;
+        }
+    
+        .message-box {
+            position: fixed;
+            top: 4%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    
+        /* CSS for success and error classes */
+        .success {
+            background-color: #4CAF50;
+        }
+    
+        .error {
+            background-color: #f44336;
+        }
+    
+        /* CSS for the icon */
+        .message-icon {
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>

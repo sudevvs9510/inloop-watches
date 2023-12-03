@@ -1,0 +1,979 @@
+<%- include('admin-partials/header.ejs') %>
+
+<div class="screen-overlay"></div>
+
+
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="index.html" class="brand-wrap">
+            <img src="/assets/imgs/theme/inloop-logo.png" class="logo" alt="inloop Dashboard">
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+            </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/usermanagement"> <i class="icon material-icons md-person"></i>
+                    <span class="text">User Management</span>
+                </a>
+            </li>
+            <li class="menu-item has-submenu active">
+                <a class="menu-link" href=""> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+                <div class="submenu ">
+                    <a href="/admin/product-management">Product List</a>
+                    <!-- <a href="page-products-grid.html">Product grid</a>
+                    <a href="page-products-grid-2.html">Product grid 2</a> -->
+                    <a href="/admin/category-management">Categories</a>
+                </div>
+            </li>
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="page-orders-1.html"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-orders-1.html">Order list 1</a>
+                    <a href="page-orders-2.html">Order list 2</a>
+                    <a href="page-orders-detail.html">Order detail</a>
+                    <a href="page-orders-tracking.html">Order tracking</a>
+                    <a href="page-invoice.html">Invoice</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="page-sellers-cards.html"> <i class="icon material-icons md-store"></i>
+                    <span class="text">Sellers</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-sellers-cards.html">Sellers cards</a>
+                    <a href="page-sellers-list.html">Sellers list</a>
+                    <a href="page-seller-detail.html">Seller profile</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="page-transactions-1.html"> <i
+                        class="icon material-icons md-monetization_on"></i>
+                    <span class="text">Transactions</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-transactions-1.html">Transaction 1</a>
+                    <a href="page-transactions-2.html">Transaction 2</a>
+                    <a href="page-transactions-details.html">Transaction Details</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Account</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-account-login.html">User login</a>
+                    <a href="page-account-register.html">User registration</a>
+                    <a href="page-error-404.html">Error 404</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item">
+                <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li> -->
+            <li class="menu-item">
+                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                    <span class="text">Brands</span> </a>
+            </li>
+            <!-- <li class="menu-item">
+                <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                    <span class="text">Statistics</span>
+                </a>
+            </li> -->
+        </ul>
+        <hr>
+        <!-- <ul class="menu-aside">
+            <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-settings"></i>
+                    <span class="text">Settings</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-settings-1.html">Setting sample 1</a>
+                    <a href="page-settings-2.html">Setting sample 2</a>
+                </div>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="page-blank.html"> <i class="icon material-icons md-local_offer"></i>
+                    <span class="text"> Starter page </span>
+                </a>
+            </li>
+        </ul> -->
+        <br>
+        <br>
+    </nav>
+</aside>
+
+<!-- <div class="main-container"> -->
+<main class="main-wrap">
+    <header class="main-header navbar">
+        <div class="col-search">
+            <form class="searchform">
+                <div class="input-group">
+                    <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                    <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
+                </div>
+                <datalist id="search_terms">
+                    <option value="Products">
+                    <option value="New orders">
+                    <option value="Apple iphone">
+                    <option value="Ahmed Hassan">
+                </datalist>
+            </form>
+        </div>
+        <div class="col-nav">
+            <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                    class="material-icons md-apps"></i> </button>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link btn-icon" href="#">
+                        <i class="material-icons md-notifications animation-shake"></i>
+                        <span class="badge rounded-pill">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
+                </li>
+                <!-- <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
+                        aria-expanded="false"><i class="material-icons md-public"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
+                        <a class="dropdown-item text-brand" href="#"><img src="/imgs/theme/flag-us.png"
+                                alt="English">English</a>
+                        <a class="dropdown-item" href="#"><img src="/stylesheets/imgs/theme/flag-fr.png"
+                                alt="Français">Français</a>
+                        <a class="dropdown-item" href="#"><img src="/stylesheets/imgs/theme/flag-jp.png"
+                                alt="Français">日本語</a>
+                        <a class="dropdown-item" href="#"><img src="/stylesheets/imgs/theme/flag-cn.png"
+                                alt="Français">中国人</a>
+                    </div>
+                </li> -->
+                <li class="dropdown nav-item">
+                    <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                        aria-expanded="false"> <img class="img-xs rounded-circle" src="/assets/imgs/people/avatar2.jpg"
+                            alt="User"></a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
+                        <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                            Profile</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                            Settings</a>
+                        <a class="dropdown-item" href="#"><i
+                                class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
+                        <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                            center</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="/admin/logout"><i
+                                class="material-icons md-exit_to_app"></i>Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+
+
+    <section class="content-main">
+
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Product Management</h2>
+                <!-- <p>Lorem ipsum dolor sit amet.</p> -->
+            </div>
+
+            <!-- Dropdown to select a category for sorting -->
+            <!-- <select id="categoryFilter" class="form-select"> -->
+            <!-- <select class="form-control form-select" id="productCategory" name="category" required>
+                                    <option value="">Select a category</option>
+                                  </select> -->
+
+
+            <!-- filter button section -->
+            <div class="btn-group me-2">
+                <form action="product-management" method="GET">
+                    <div class="input-group">
+                        <select class="form-select" name="category" id="category-filter">
+                            <option value="">All Categories</option>
+                            <% categories.forEach(category => { %>
+                            <option value="<%= category._id %>"
+                                <%= category._id.toString() === selectedCategory ? 'selected' : '' %>>
+                                <%= category.name %>
+                            </option>
+                            <% }) %>
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-sm rounded me-2" id="filter-button">Filter</button>
+                    </div>
+                </form>
+
+                <button type="button" class="btn btn-primary btn-sm rounded" data-bs-toggle="modal"
+                    data-bs-target="#createProductModal">
+                    Add Product
+                </button>
+            </div>
+
+
+
+
+            <div class="btn-group mb-2 me-2">
+                
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- <div class="content-wrapper"> -->
+
+            <!-- Content wrapper start -->
+            <div class="content-wrapper">
+                <!-- Modal for adding new products -->
+                <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+                <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+
+
+                <div class="container mt-2">
+                    <% products.forEach((item)=>{ %>
+                    <div class="d-flex justify-content-center row mt-2">
+                        <div class="col-md-10">
+                            <div class="row p-2 bg-white border rounded">
+                                <div class="col-md-3 mt-1">
+
+                                    <img class="img-fluid img-responsive rounded product-image" src="/<%= item.image %>"
+                                        alt="<%= item.productName %> Image">
+                                    <!-- "data:image/webp;base64 -->
+                                </div>
+                                <div class="col-md-6 mt-1">
+                                    <h5>
+                                        <%= item.productName %>
+                                    </h5>
+
+
+                                    <div class="mt-1 mb-1 spec-1">
+                                        <span><%= item.brand %></span>
+                                        <span class="dot"></span>
+                                        <span>|| Stocks:
+                                            <span class="<%= item.countInStock === 0 ? 'text-danger' : '' %>">
+                                                <%= item.countInStock %>
+                                                <%= item.countInStock===0 ? ' (Out of Stock)' : '' %>
+                                            </span>
+                                        </span>
+                                        <span class="dot"></span>
+                                        <span class="badge <%= item.isFeatured ? 'bg-success' : 'bg-danger' %>">
+                                            <%= item.isFeatured ? 'Published' : 'Not Published' %>
+                                        </span>
+                                    </div>
+
+                                    <div class="mt-1 mb-1 spec-1">
+                                        <span><%= item.description %></span>
+                                    </div>
+                                    <p class="text-justify text-truncate para mb-0">
+                                        <% if (item.category && item.category.name) { %>
+                                        Category : <%= item.category.name %><br><br>
+                                        <% } %>
+                                        Description : <%= item.description %>
+                                    </p>
+
+                                    <div class="d-flex flex-row">
+
+                                        <div class="ratings mr-2 me-1">
+                                            <% for (let i=1; i <=5; i++) { %>
+                                            <% if(i<=item.rating){ %>
+                                            <i class="fa fa-star" style="color: yellow;"></i>
+                                            <% }else{ %>
+                                            <i class="fa fa-star" style="color: black; border-color: black;"></i>
+                                            <% } } %>
+                                        </div>
+                                        <span><%= item.rating %></span>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                    <div class="d-flex flex-row align-items-center">
+
+                                        <h4 class="mr-1">₹ <%= item.price %>
+                                        </h4>
+
+                                    </div>
+
+
+
+                                    <button onclick="listUser('<%= item._id %>')" id="listButton_<%= item._id %>" data-product-id="<%= item._id %>" data-is-featured="<%= item.isFeatured %>"
+                                        class="btn btn-sm publish-button
+                                                    <%= (item.category && !item.category.isDeleted) ? (item.isFeatured ? 'btn-success' : 'btn-dark') : 'btn-dark' %>"
+                                        data-toggle="modal" data-target="#publishModal">
+                                        <%=(item.isFeatured ? 'Unlist' : 'list' ) %>
+                                    </button>
+
+
+
+                                    <div class="d-flex flex-column mt-4">
+
+
+                                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#editModal<%= item._id %>" type="button"
+                                            data-category-id="<%= item._id %>">Edit product
+                                        </button>
+
+                         <button class="btn  btn-danger btn-sm mt-2" type="button"
+                                            onclick="deleteProduct('<%= item._id %>')"
+                                            aria-labelledby="exampleModalLabel" data-bs-toggle="modal"
+                                            data-bs-target="#confirmationModal">
+                                            Delete product
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Modal for editing product details -->
+                                <div class="modal fade" id="editModal<%= item._id %>" tabindex="-1" role="dialog"
+                                    aria-labelledby="editProductModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editProductModalLabel">
+                                                    Edit Product Details</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <!-- <span aria-hidden="true">&times;</span> -->
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <!-- Form for editing product details -->
+                                                <form action="product-management/editProduct/<%= item._id %>"
+                                                    enctype="multipart/form-data" id="EditProductForm" method="post">
+                                                    <!-- You can include the product ID as a hidden input -->
+                                                    <div class="form-group  mb-3">
+                                                        <label for="editProductName">Product
+                                                            Name</label>
+                                                        <input type="text" class="form-control" id="editProductName"
+                                                            name="productName" value="<%= item.productName %>">
+                                                    </div>
+                                                    <div class="form-group  mb-3">
+                                                        <label for="editProductDescription">Description</label>
+                                                        <textarea class="form-control" id="editProductDescription"
+                                                            name="description"
+                                                            required><%= item.description %></textarea>
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        <label for="editMainImage">Main Image
+                                                            (Upload one file)</label>
+                                                        <input type="file" class="form-control-file" id="editMainImage"
+                                                            name="image" accept="image/*">
+                                                        <div class="mt-2">
+                                                            <!-- Display the current main image if it exists -->
+                                                            <% if (item.image) { %>
+                                                            <img src="/<%= item.image %>"
+                                                                alt="<%= item.productName %> Image"
+                                                                style="max-width: 100%; height: 50px;">
+                                                            <% } else { %>
+                                                            <!-- Show a placeholder image or message if no current image exists -->
+                                                            <img src="/placeholder-image.png" alt="No Image"
+                                                                style="max-width: 100%; height: auto;">
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group mb-3">
+                                                        <label for="editAdditionalImages">Additional
+                                                            Images (Upload multiple
+                                                            files)</label>
+                                                        <input type="file" class="form-control-file"
+                                                            id="editAdditionalImages" name="images" accept="image/*"
+                                                            multiple>
+
+                                                        <div class="mt-2">
+                                                            <!-- Display the current additional images if they exist -->
+                                                            <% if (item.images &&
+                                                                                        item.images.length> 0) { %>
+                                                            <div class="row">
+                                                                <%
+                                                                                                item.images.forEach(image=>
+                                                                                                {
+                                                                                                %>
+                                                                <div class="col-md-3">
+                                                                    <img src="/<%= image %>" alt="Additional Image"
+                                                                        style="max-width: 100%; height: 50px;">
+                                                                </div>
+                                                                <% }); %>
+                                                            </div>
+                                                            <% } else { %>
+                                                            <!-- Show a message if no current additional images exist -->
+                                                            <p>No additional images
+                                                                available.</p>
+                                                            <% } %>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group  mb-3">
+                                                        <label for="editProductBrand">Brand</label>
+                                                        <input type="text" class="form-control" id="editProductBrand"
+                                                            name="brand" value="<%= item.brand %>">
+                                                    </div>
+
+                                                    <div class="form-group  mb-3">
+                                                        <label for="editProductCountInStock">Count
+                                                            in Stock</label>
+                                                        <input type="number" class="form-control"
+                                                            id="editProductCountInStock" name="countInStock"
+                                                            value="<%= item.countInStock %>" required>
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <label for="editProductCategory">Category</label>
+                                                        <select class="form-control" id="editProductCategory"
+                                                            name="category" required>
+                                                            <option value="">Select a category
+                                                            </option>
+                                                            <% categories.forEach(category=> {
+                                                                                        %>
+                                                            <option value="<%= category._id %>" <%=item.category &&
+                                                                                            category._id.toString()===item.category._id.toString()
+                                                                                            ? 'selected' : '' %>>
+                                                                <%= category.name %>
+                                                            </option>
+                                                            <% }) %>
+                                                        </select>
+                                                    </div>
+                                            
+                                            <div class="form-group  mb-3">
+                                                <label for="editProductPrice">Price</label>
+                                                <input type="number" class="form-control" id="editProductPrice"
+                                                    name="price" value="<%= item.price %>" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Save
+                                                Changes</button>
+                                            </form>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <% }) %>
+        <br></br>
+        </div>
+
+        </div>
+
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="modal fade" id="createProductModal" tabindex="-1" role="dialog"
+            aria-labelledby="createProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createProductModalLabel">Add New Product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST" id="addNewProduct" action="product-management/newProduct"
+                            enctype="multipart/form-data">
+                            <div class="form-group mb-3">
+                                <label for="productName">Product Name</label>
+                                <input type="text" class="form-control" id="productName" name="productName" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="productDescription">Description</label>
+                                <textarea class="form-control" id="productDescription" name="description"
+                                    required></textarea>
+                            </div>
+
+                            Main image
+
+                            <div class="form-group mb-3">
+                                <label for="mainImage">Main Image (Upload one file)</label>
+                                <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+                            </div>
+
+
+
+                            <div class="form-group mb-3">
+                                <label for="additionalImages">Additional Images (Upload multiple files)</label>
+                                <input type="file" class="form-control-file" id="images" name="images" accept="image/*"
+                                    multiple>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="productBrand">Brand</label>
+                                <input type="text" class="form-control" id="productBrand" name="brand">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="productCountInStock">Count in Stock</label>
+                                <input type="number" class="form-control" id="productCountInStock" name="countInStock"
+                                    required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="productCategory">Category</label>
+                                <select class="form-control" id="productCategory" name="category" required>
+                                    <option value="">Select a category</option>
+
+                                    <% categories.forEach(category=> { %>
+                                    <option value="<%= category._id %>">
+                                        <%= category.name %>
+                                    </option>
+                                    <% }) %>
+
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="productPrice">Price</label>
+                                <input type="number" class="form-control" id="productPrice" name="price" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p class="text-center">Are you sure you want to delete this user?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="cancelDelete()">No</button>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="pagination-area mt-30 mb-50">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-start">
+                    <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                    <li class="page-item"><a class="page-link dot" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">16</a></li>
+                    <li class="page-item"><a class="page-link" href="#"><i
+                                class="material-icons md-chevron_right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+        <script>
+
+         async function listUser(id) {
+            let response = await fetch('/admin/product-management/featuredProduct', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({
+                  id
+               })
+            })
+            if (response.status === 200) {
+               document.getElementById('listButton_' + id).className = 'btn btn-danger'
+               document.getElementById('listButton_' + id).innerHTML = 'Unlist'
+            } else if (response.status === 201) {
+               document.getElementById('listButton_' + id).className = 'btn btn-success'
+               document.getElementById('listButton_' + id).innerHTML = 'list'
+            } else if (response.status === 402) {
+               window.location.reload()
+            }
+         }
+     
+
+
+
+
+            const confirmationModal = document.getElementById('confirmationModal');
+            //  confirmationModal.style.display = 'block'; 
+            function deleteProduct(productId) {
+                // Show the custom confirmation modal
+                $('#confirmationModal').show('modal')
+
+                // Store the productId in a data attribute for later use
+                confirmationModal.dataset.productId = productId;
+            }
+
+            function confirmDelete() {
+                const productId = confirmationModal.dataset.productId;
+
+                // Close the custom confirmation modal
+                confirmationModal.style.display = 'none';
+
+                // Send a DELETE request to delete the product
+                fetch('product-management/delete-product/' + productId, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Product was successfully deleted
+                            // Reload the page to update the list of products
+                            alert('Successfully deleted');
+                            window.location.reload();
+                        } else {
+                            // Handle error
+                            alert('An error occurred while deleting the product.');
+                        }
+                    });
+            }
+
+            function cancelDelete() {
+                confirmationModal.style.display = 'none';
+                window.location.reload();
+            }
+
+
+
+            $(document).ready(function () {
+                // Fetch categories from the backend API
+                $.ajax({
+                    url: 'product-management/getCategories', // Adjust the URL as needed
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Iterate over the categories and add options to the select boxes
+                        data.forEach(function (category) {
+                            $('.product-category-select').each(function () {
+                                const productId = $(this).data('product-id');
+                                if ($(this).attr('id') ===
+                                    `productCategory${productId}`) {
+                                    $(this).append($('<option>', {
+                                        value: category._id,
+                                        text: category.name
+                                    }));
+                                }
+                            });
+                        });
+                    },
+                    error: function (error) {
+                        console.error(error);
+                        //This is For Edit Product
+
+                    }
+                });
+            });
+
+
+            $(document).ready(function () {
+                // Fetch categories from the backend API
+                $.ajax({
+                    url: 'product-management/getCategories', // Adjust the URL as needed
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Iterate over the categories and add options to the select box
+                        data.forEach(function (category) {
+                            $('#productCategory').append($('<option>', {
+                                value: category._id,
+                                text: category.name
+                            }));
+                        });
+                    },
+                    error: function (error) {
+                        console.error(error);
+                        // this is for add new product
+                        // Handle the error appropriately (e.g., display an error message)
+
+                    }
+                });
+            });
+
+            // Handle form submission (adding new product)
+
+            $(document).ready(function () {
+                $("#productForm").submit(function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    // Serialize the form data into a JSON object
+                    var formData = new FormData(this);
+
+                    // Send an AJAX POST request to the server
+                    $.ajax({
+                        type: "POST",
+                        url: "product-management/newProduct", // Adjust the URL as needed
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+
+                            // Handle success response from the server (e.g., display a success message)
+                            $("#successMessage").text("Product added successfully").show();
+                            $("#errorMessage").hide();
+                            console.log("Product added successfully");
+                            // You can redirect or perform other actions here
+                        },
+                        error: function (error) {
+                            // Handle error response from the server (e.g., display an error message)
+                            console.error("Error adding product: " + error.responseText);
+                            $("#errorMessage").text("Error adding product: " + error
+                                    .responseText)
+                                .show();
+                            $("#successMessage").hide();
+                        }
+                    });
+                });
+            });
+
+
+            // Handle form submission (editing product)
+
+            $(document).ready(function () {
+                $(".edit-product-form").submit(function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    // Serialize the form data into a JSON object
+                    var formData = new FormData(this);
+
+                    // Send an AJAX POST request to the server
+                    $.ajax({
+                        type: "POST",
+                        url: "product-management/editProduct/" + $(this).data(
+                            "product-id"), // Use data-product-id to specify the product ID
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            // Handle success response from the server
+                            $("#successMessage").text("Product updated successfully")
+                                .show();
+                            $("#errorMessage").hide();
+                            console.log("Product updated successfully");
+                            // You can redirect or perform other actions here
+                        },
+                        error: function (error) {
+                            // Handle error response from the server
+                            $("#errorMessage").text("Error updating product: " + error
+                                    .responseText)
+                                .show();
+                            $("#successMessage").hide();
+                            console.error("Error updating product: " + error.responseText);
+                        }
+                    });
+                });
+            });
+
+
+            // Function to handle the Publish button click event
+
+            function handlePublishButtonClick(productId, isFeatured) {
+                const newIsFeatured = !isFeatured; // Toggle the isFeatured value
+                const requestData = {
+                    isFeatured: newIsFeatured
+                };
+                alert("ethiii")
+                // Maalke an AJAX request to update the isFeatured status
+                $.ajax({
+                    url: `product-management/updateProduct/${productId}`, // Adjust the URL as needed
+                    method: 'PUT',
+                    data: requestData,
+                    success: function (response) {
+                        // Update the button text
+                        const buttonText = newIsFeatured ? 'Unpublish' : 'Publish';
+                        $(`button[data-product-id="${productId}"]`).text(buttonText);
+
+                        // Update the data-is-featured attribute
+                        $(`button[data-product-id="${productId}"]`).data('is-featured', newIsFeatured);
+
+                        // Handle any other UI updates or notifications
+                        window.location.reload();
+                    },
+                    error: function (error) {
+                        // Handle error
+                        console.error(error);
+                        // Display an error message or take appropriate action
+                        // ...
+                    }
+                });
+            }
+
+            // Attach a click event listener to the Publish buttons
+
+            $('.publish-button').click(function () {
+                const productId = $(this).data('product-id');
+                const isFeatured = $(this).data('is-featured');
+                handlePublishButtonClick(productId, isFeatured);
+            });
+
+            // VALIDATIONS
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const Addform = document.getElementById("addNewProduct");
+
+                Addform.addEventListener("submit", function (event) {
+                    let valid = true;
+
+                    // Validation for Product Name
+                    const productName = document.getElementById("productName").value.trim();
+                    if (productName === "") {
+                        valid = false;
+                        alert("Please enter a Product Name");
+                    }
+
+                    // Validation for Description
+                    const productDescription = document.getElementById("productDescription").value
+                        .trim();
+                    if (productDescription === "") {
+                        valid = false;
+                        alert("Please enter a Description");
+                    }
+
+                    // Validation for Main Image
+                    const mainImageInput = document.getElementById("image");
+                    const mainImageFile = mainImageInput.files[0];
+                    if (!mainImageFile) {
+                        valid = false;
+                        alert("Please upload a Main Image");
+                    } else if (!mainImageFile.type.startsWith("image/")) {
+                        valid = false;
+                        alert("Main Image must be in image format");
+                    }
+
+                    // Validation for Additional Images
+                    const additionalImagesInput = document.getElementById("images");
+                    const additionalImagesFiles = additionalImagesInput.files;
+                    for (let i = 0; i < additionalImagesFiles.length; i++) {
+                        const file = additionalImagesFiles[i];
+                        if (!file.type.startsWith("image/")) {
+                            valid = false;
+                            alert("Additional Images must be in image format");
+                            break;
+                        }
+                    }
+
+                    // Validation for Count in Stock
+                    const countInStock = document.getElementById("productCountInStock").value.trim();
+                    if (countInStock === "" || isNaN(countInStock)) {
+                        valid = false;
+                        alert("Please enter a valid Count in Stock");
+                    }
+
+                    // Validation for Price
+                    const price = document.getElementById("productPrice").value.trim();
+                    if (price === "" || isNaN(price)) {
+                        valid = false;
+                        alert("Please enter a valid Price");
+                    }
+
+                    // You can add more validations for other fields as needed
+
+                    if (!valid) {
+                        event.preventDefault(); // Prevent form submission if validation fails
+                    }
+                });
+            });
+
+
+
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.getElementById("EditProductForm");
+
+                form.addEventListener("submit", function (event) {
+                    let valid = true;
+
+                    // Validation for Product Name
+                    const productName = document.getElementById("editProductName").value.trim();
+                    if (productName === "") {
+                        valid = false;
+                        alert("Please enter a Product Name");
+                    }
+
+                    // Validation for Description
+                    const productDescription = document.getElementById("editProductDescription").value
+                        .trim();
+                    if (productDescription === "") {
+                        valid = false;
+                        alert("Please enter a Description");
+                    }
+
+                    // Validation for Main Image
+                    const mainImageInput = document.getElementById("editMainImage");
+                    const mainImageFile = mainImageInput.files[0];
+                    if (mainImageFile) {
+                        if (!mainImageFile.type.startsWith("image/")) {
+                            valid = false;
+                            alert("Main Image must be in image format");
+                        }
+                    }
+
+                    // Validation for Additional Images
+                    const additionalImagesInput = document.getElementById("editAdditionalImages");
+                    const additionalImagesFiles = additionalImagesInput.files;
+                    for (let i = 0; i < additionalImagesFiles.length; i++) {
+                        const file = additionalImagesFiles[i];
+                        if (!file.type.startsWith("image/")) {
+                            valid = false;
+                            alert("Additional Images must be in image format");
+                            break;
+                        }
+                    }
+
+
+                    // Validation for Count in Stock
+                    const countInStock = document.getElementById("editProductCountInStock").value
+                        .trim();
+                    if (countInStock === "" || isNaN(countInStock)) {
+                        valid = false;
+                        alert("Please enter a valid Count in Stock");
+                    }
+
+                    // Validation for Price
+                    const price = document.getElementById("editProductPrice").value.trim();
+                    if (price === "" || isNaN(price)) {
+                        valid = false;
+                        alert("Please enter a valid Price");
+                    }
+
+                    // You can add more validations for other fields as needed
+
+                    if (!valid) {
+                        event.preventDefault(); // Prevent form submission if validation fails
+                    }
+                });
+            });
+        </script>
+
+
+
+        <%- include('admin-partials/footer.ejs') %>
