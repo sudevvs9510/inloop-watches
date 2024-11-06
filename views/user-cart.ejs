@@ -534,7 +534,7 @@
                                 <img alt="Evara" src="/userassets/imgs/theme/icons/icon-cart.svg">
                                 <span class="pro-count white"><%= cartItemCount %></span>
                             </a>
-                            <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                            <!-- <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                 <ul>
                                     <li>
                                         <div class="shopping-cart-img">
@@ -572,7 +572,7 @@
                                         <a href="shop-checkout.html">Checkout</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="header-action-icon-2 d-block d-lg-none">
                             <div class="burger-icon burger-icon-white">
@@ -648,17 +648,25 @@
                                     </td>
 
                                     <td class="text-center" data-title="Stock">
-                                        <div class="detail-qty  radius  m-auto">
-                                            <a href="#" class="qty-down "
-                                                onclick="updateQuantity('<%= item.data._id  %>','<%= userData._id %>','<%= item.data.countInStock %>','<%= item.quantity %>','sub')"><i
-                                                    class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val me-3"
-                                                id="qty-<%= item.data._id  %>"><%= item.quantity %></span>
+                                        <div class="detail-qty radius m-auto">
+                                            <!-- Qty Down Button -->
+                                            <a href="#" id="qty-down-<%= item.data._id %>" class="qty-down" 
+                                                onclick="updateQuantity('<%= item.data._id %>', '<%= userData._id %>', '<%= item.data.countInStock %>', '<%= item.quantity %>', 'sub')">
+                                                <i class="fi-rs-angle-small-down"></i>
+                                            </a>
+                                    
+                                            <!-- Quantity Value -->
+                                            <span class="qty-val me-3" id="qty-<%= item.data._id %>"><%= item.quantity %></span>
+                                    
+                                            <!-- Qty Up Button -->
                                             <a href="#" class="qty-up"
-                                                onclick="updateQuantity('<%= item.data._id  %>','<%= userData._id %>','<%= item.data.countInStock %>','<%= item.quantity %>','sum')"><i
-                                                    class="fi-rs-angle-small-up"></i></a>
+                                                onclick="updateQuantity('<%= item.data._id %>', '<%= userData._id %>', '<%= item.data.countInStock %>', '<%= item.quantity %>', 'sum')">
+                                                <i class="fi-rs-angle-small-up"></i>
+                                            </a>
                                         </div>
                                     </td>
+                                    
+                                    
 
                                     <td class="text-right" data-title="Cart">
                                         <span>₹ <%= item.data.afterDiscount*item.quantity %> </span>
@@ -823,33 +831,51 @@
 
 <script>
     async function updateQuantity(productId, userId, stock, current, need) {
-        const verify = (need === 'sub') ? true : (parseInt(stock) > parseInt(current))
-        if (verify) {
-            let res = await fetch('/update-cart-quantity', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    productId,
-                    userId,
-                    need
-                })
 
-            })
-            if (res.status === 200) {
-                location.reload()
-            }
-        } else {
-            await Swal.fire({
-                title: 'Error',
-                text: 'Stock limit exceeded .',
-                icon: 'Sorry',
-                showConfirmButton: true
-            });
-            window.location.reload();
-        }
+        if (need === 'sub' && current <= 1) {
+        await Swal.fire({
+            title: 'Error',
+            text: 'You cannot reduce the quantity below 1.',
+            icon: 'error',
+            showConfirmButton: true
+        });
+        return;  // Prevent the update
     }
+    const isQuantityValid = need === 'sub' || parseInt(stock) > parseInt(current);
+    if (!isQuantityValid) {
+        await Swal.fire({
+            title: 'Error',
+            text: 'Stock limit exceeded.',
+            icon: 'error',
+            showConfirmButton: true
+        });
+        return;
+    }
+
+    try {
+        let response = await fetch('/update-cart-quantity', {
+            method: 'PUT', // Use PUT instead of POST
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ productId, userId, need })
+        });
+
+        if (response.ok) {
+            let data = await response.json();
+           // Update quantity in the UI instead of reloading the page
+           const qtyElement = document.getElementById(`qty-${productId}`);
+            qtyElement.textContent = data.quantity.quantity;
+            location.reload();
+        } else {
+            throw new Error('Failed to update quantity');
+        }
+    } catch (error) {
+        Swal.fire('Error', 'An error occurred while updating the quantity.', 'error');
+        console.error('Fetch Error:', error);
+    }
+}
+
 
 
     // async function removeProductCart(productId, userId) {

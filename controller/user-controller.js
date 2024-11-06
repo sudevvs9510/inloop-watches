@@ -1556,7 +1556,7 @@ const wishlistAdd = async (req, res) => {
     if(!req.session.email || !req.session.userId || !req.session.data){
       return res.redirect('/login')
     }
-    console.log("haui")
+    
     const productId = req.params.productId;
     const userId = req.session.userId;
 

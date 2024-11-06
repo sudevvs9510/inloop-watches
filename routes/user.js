@@ -47,7 +47,7 @@ router.post('/withdraw',logSession,wallet.withdrawMoney)
 //cart 
 router.get('/cart',logSession,cart.userCart)
 router.post('/addtocart',logSession, cart.addToCart)
-router.post('/update-cart-quantity',logSession, cart.cartPut)
+router.put('/update-cart-quantity',logSession, cart.cartPut)
 router.post('/remove-product',logSession, cart.cartRemove)
 // router.patch('/update-cart-total',logSession, cart.cartbillTotalUpdate)
 

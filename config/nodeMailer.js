@@ -10,6 +10,9 @@ const transporter = nodemailer.createTransport({
     user: 'sudevvs1999@gmail.com', // Your Gmail email address
     pass: 'dkrszqhmjlrtxpxa', // Your Gmail application-specific password
   },
+  tls: {
+    rejectUnauthorized: false
+ }
 });
 
 function sentOtp(email) {

@@ -61,29 +61,23 @@ const userCart = async (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-    if(!req.session.email || !req.session.userId || req.session.data){
+    if(!req.session.email || !req.session.userId ){
       res.redirect('/login')
+      return
     }
     const { productId, stock } = req.body;
     const product = await productModel.findById(productId);
     if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Product Not Found" });
+      return res.status(404).json({ success: false, message: "Product Not Found" });
     }
     if (product.countInStock === 0) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Product is out of stock" });
+      return res.status(400).json({ success: false, message: "Product is out of stock" });
     }
-    // const userId =  req.session.userId;
-    // console.log(req.session.email._id);
+
     let userId = req.session.userId;
     const user = await userModel.findById(userId);
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "user is not found" });
+      return res.status(404).json({ success: false, message: "user is not found" });
     }
 
     let cart = await cartModel.findOne({ owner: userId });
@@ -101,15 +95,17 @@ const addToCart = async (req, res) => {
     )
 
     let outOfStock = false;
+
     if (cartItem) {
-      if (cartItem.quantity < stock) {
+      console.log("kikiokio",cartItem, product.countInStock)
+      if (cartItem.quantity < product.countInStock) {
         cartItem.quantity += 1;
         cartItem.productPrice = product.afterDiscount;
         cartItem.price = cartItem.quantity * product.afterDiscount;
       } else {
         outOfStock = true;
       }
-    } else {
+    } else if(product.countInStock > 0){
       cart.items.push({
         productId: productId,
         name: product.productName,
@@ -118,104 +114,115 @@ const addToCart = async (req, res) => {
         quantity: 1,
         price: product.afterDiscount,
       });
+    } else {
+      outOfStock = true
     }
+
+    //update the cart's total bill
     cart.billTotal = cart.items.reduce((total, item) => total + item.price, 0);
     await cart.save();
     // console.log(`Bill Total"  ${cart.billTotal}`);
-    if (outOfStock===true) {
-      res.status(205).json({ status: true });
-    } else if (outOfStock===false) {
-      res.status(200).json({ status: true});
+    if (outOfStock) {
+      res.status(205).json({ status: true , message:"Stock limit exceeded"});
+    } else {
+      res.status(200).json({ status: true, message:"Item added to cart successfully", cart});
     }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+  } catch (err) { 
+    console.log(err);  
+    if (!res.headersSent) { 
+      res.status(500).json({ success: false, message: "Internal server error" });
+    }
   }
-};
+};     
 
-const cartPut = async (req, res) => {
-  try {
-    if(!req.session.email || !req.session.userId || req.session.data){
-      res.redirect('/login')
+const cartPut = async (req, res) => { 
+  try { 
+    if(!req.session.email || !req.session.userId){
+      res.redirect('/login')  
+      return
     }
-    console.log(req.body);
-    const productId = req.body.productId;
+    const { productId, userId, need } = req.body;
+    console.log("cartPut req body",productId, userId, need)
 
-    // Find the user's cart based on their user ID (you may use cookies or sessions)
-    const userId = req.body.userId;
-    console.log(userId);
     const cart = await cartModel.findOne({ owner: userId });
-
+    
     if (!cart) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Cart not found" });
+      return res.status(404).json({ success: false, message: "Cart not found" });
     }
 
-    const cartItem = cart.items.find(
-      (item) => item.productId.toString() === productId
-    );
+    const cartItem = cart.items.find((item) => item.productId.toString() === productId);
 
     if (!cartItem) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Cart item not found" });
+      return res.status(404).json({ success: false, message: "Cart item not found" });
     }
     const product = await productModel.findById(productId);
     if (!product) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Product not found" });
+      return res.status(404).json({ success: false, message: "Product not found" });
     }
 
-    cartItem.quantity =
-      req.body.need === "sub" ? cartItem.quantity - 1 : cartItem.quantity + 1;
-    cartItem.price = cartItem.quantity * cartItem.productPrice;
+    // Update cart item quantity and price
+    cartItem.quantity = need === "sub" ? cartItem.quantity - 1 : cartItem.quantity + 1;
 
-    cart.billTotal =
-      req.body.need === "sub"
-        ? cart.billTotal - product.afterDiscount
+    // Ensure the quantity is not below 1
+    if (cartItem.quantity < 1) {
+      return res.status(400).json({ success: false, message: "Quantity cannot be less than 1" });
+    }
+
+    // cartItem.price = cartItem.quantity * cartItem.productPrice;
+    cartItem.price = cartItem.quantity * product.afterDiscount;
+
+    // Update the cart's total bill
+    cart.billTotal = need === "sub"
+        ? Math.max(0,cart.billTotal - product.afterDiscount)
         : cart.billTotal + product.afterDiscount;
-    const quantity = cartItem.quantity;
+   
+    // const quantity = cartItem.quantity;
+    console.log("cart",cart)
 
     await cart.save(); // Save the updated cart
 
-    return res.status(200).json({ success: true, quantity: { quantity } });
+    return res.status(200).json({ success: true, quantity: {quantity: cartItem.quantity } });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    if (!res.headersSent) { 
+      res.status(500).json({ success: false, message: "Internal server error" });
+    }
   }
 };
 
 const cartRemove = async (req, res) => {
   try {
-    if(!req.session.email || !req.session.userId || req.session.data){
+    if(!req.session.email || !req.session.userId){
       res.redirect('/login')
+      return
     }
     console.log(req.body);
-    const productId = req.body.productId;
-    const userId = req.body.userId;
+    const {productId, userId} = req.body
+    console.log("Req body",productId, userId)
+
+    // Ensure the userId in session matches the userId provided in the request
+    if (req.session.userId !== userId) {
+      return res.status(403).json({ success: false, message: "Unauthorized action" });
+    }
 
     const cart = await cartModel.findOne({ owner: userId });
 
     if (!cart) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Cart Not Found" });
+      return res.status(404).json({ success: false, message: "Cart Not Found" });
     }
 
-    //  const productIndex = cart.items.findIndex((item) => item.productId.toString() === productId);
+    // Find the product in the cart
+     const productIndex = cart.items.findIndex((item) => item.productId.toString() === productId);
 
-    //  if(productIndex === -1){
-    //      return res.status(404).json({success:false,message:'Product not found'})
-    //  }
+     if(productIndex === -1){
+         return res.status(404).json({success:false,message:'Product not found'})
+     }
 
-    // / Check if the removed item was selected and adjust the billTotal
-    //  if (cart.items[productIndex].selected) {
-    //      cart.billTotal -= cart.items[productIndex].price;
-    //  }
+    // Adjust the billTotal
+    const item = cart.items[productIndex];
+    cart.billTotal = Math.max(cart.billTotal - item.price, 0);
 
-    //  cart.items.splice(productIndex,1);
+     cart.items.splice(productIndex,1);
 
     cart.items.find((item) => {
       if (item.productId + "" === productId + "") {
@@ -239,7 +246,9 @@ const cartRemove = async (req, res) => {
       .json({ success: true, message: "Product removed from the cart" });
   } catch (err) {
     console.log(err);
+    if (!res.headersSent) { 
     res.status(500).json({ success: false, message: "Internal server error" });
+    }
   }
 };
 
